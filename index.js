@@ -1,5 +1,10 @@
-const apikey = "75f9b98615b6b1257772e363ab021c31";
 
+//added base and key value
+const apiKey = {
+    key:"75f9b98615b6b1257772e363ab021c31",
+    base: "https://api.openweathermap.org/data/2.5/"
+  }
+// ended
 const weatherDataEl = document.getElementById("weather-data")
 
 const cityInputEl = document.getElementById("city-input")
@@ -15,9 +20,11 @@ formEl.addEventListener("submit",(event)=>{
 
 async function getWeatherData(cityValue){
     try{
-        const response = await fetch (`https://api.openweathermap.org/data/2.5/weather?
-        q=${cityValue}&appid=${apikey}&units=metric`)
-
+        // done some changes in fetching api
+        const response = await fetch (
+            `${apiKey.base}weather?q=${cityValue}&units=metric&APPID=${apiKey.key}
+            `)
+            // changes end
         if(!response.ok){
             throw new Error ("Network response was not ok")
         }
@@ -39,7 +46,7 @@ async function getWeatherData(cityValue){
         weatherDataEl.querySelector(
             ".icon"
             ).innerHTML = `<img src="http://openweathermap.org/img/wn/${icon}.png"
-         alt="Weather Icon">`;
+         alt="Weather Icon"> `;
          weatherDataEl.querySelector(
             ".temperature"
          ).textContent = `${temperature}°C`;
